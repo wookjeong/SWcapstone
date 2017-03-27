@@ -22,7 +22,7 @@ locy = 1;
 width = size(wally, 2);
 height = size(wally, 1);
 
-%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% cho myung jae byung sin
 %%%%%%%%%%%%%%%%%%
 cc=normxcorr2(newface,newwaldo);
 figure(5);

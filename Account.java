@@ -1,4 +1,4 @@
-
+#
 public class Account {
 	private String name;
 	private double balance;
@@ -37,7 +37,7 @@ public class Account {
 			balance = balance - withdrawAmount;
 		}
 		else
-			System.out.println("Error: ÀÜ¾× ºÎÁ·À¸·Î  Ãâ±İ ºÒ°¡.");
+			System.out.println("Error: Ã€ÃœÂ¾Ã— ÂºÃÃÂ·Ã€Â¸Â·Ã  ÃƒÃ¢Â±Ä° ÂºÃ’Â°Â¡.");
 		return balance;
 	}
 	

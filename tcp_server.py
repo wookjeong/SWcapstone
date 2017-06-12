@@ -10,7 +10,7 @@ import multiprocessing
 import threading
 from socket import *
 from time import ctime
-import sensor2
+import sensor
 import sys
 
 ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'auto\n', 'home', 'x+', 'cameraleft', 'y+', 'y-']
@@ -222,7 +222,7 @@ if __name__ == "__main__":
 	collision = multiprocessing.Value('i',0)#shared memory within multi processing that is about Collision
 	procs.append(multiprocessing.Process(target=jeongwook.handle_video,args=(value,)))#Makes 3 multi processing
 	procs.append(multiprocessing.Process(target=server, args=(value,collision,)))
-	procs.append(multiprocessing.Process(target=sensor2.sensor, args=(collision,)))
+	procs.append(multiprocessing.Process(target=sensor.sensor, args=(collision,)))
 
 	for p in procs:
 		p.start() 

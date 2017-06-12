@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@android:color/white"
+    tools:context="com.jeongwook.test.MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/icar"
+        android:onClick="image"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/ipaddress"
+        android:textColorLink="@android:color/black"
+        android:text="172.20.10.8"
+        android:textColor="?attr/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="button"
+        android:layout_alignTop="@+id/ipaddress"
+        android:layout_toRightOf="@+id/ipaddress"
+        android:layout_toEndOf="@+id/ipaddress" />
+
+</RelativeLayout>

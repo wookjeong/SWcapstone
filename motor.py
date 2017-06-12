@@ -2,8 +2,7 @@
 import RPi.GPIO as GPIO
 import PCA9685 as p
 import time    # Import necessary modules
-#from sensor import col  #aaaaaa
-
+import car_dir
 # ===========================================================================
 # Raspberry Pi pin11, 12, 13 and 15 to realize the clockwise/counterclockwise
 # rotation and forward and backward movements
@@ -28,7 +27,6 @@ pins = [Motor0_A, Motor0_B, Motor1_A, Motor1_B]
 # ===========================================================================
 def setSpeed(speed):
 	speed *= 40
-	print 'speed is: ', speed
 	pwm.write(EN_M0, 0, speed)
 	pwm.write(EN_M1, 0, speed)
 
@@ -71,15 +69,10 @@ def setup(busnum=None):
 
 
 def motor0(x):
-	#if col == 1 :
-	#	x = 'False'
-	if x == 'True':
+	if  x == 'True':
 		GPIO.output(Motor0_A, GPIO.LOW)
 		GPIO.output(Motor0_B, GPIO.HIGH)
-	#	if mod == 1 :
-	#		time.sleep(2)
-	#		for pin in pins :
-	#			GPIO.output(pin,GPIO.LOW)		
+		
 	elif x == 'False':
 		GPIO.output(Motor0_A, GPIO.HIGH)
 		GPIO.output(Motor0_B, GPIO.LOW)
@@ -87,48 +80,54 @@ def motor0(x):
 		print 'Config Error'
 
 def motor1(x):
-	#print('col = ',col)
-	#if col == 1 :
-	#	x = 'False'
+	
+
 	if x == 'True':
 		GPIO.output(Motor1_A, GPIO.LOW)
 		GPIO.output(Motor1_B, GPIO.HIGH)
-	#	if mod == 1 :
-	#		time.sleep(2)
-	#		for pin in pins :
-	#			GPIO.output(pin,GPIO.LOW)
+
 	elif x == 'False':
 		GPIO.output(Motor1_A, GPIO.HIGH)
 		GPIO.output(Motor1_B, GPIO.LOW)
+
+#========================================================================
+#When in automatic mode, Control the DC motor
+#======================================================================== 
+
 def forward_auto() :
 	motor0(forward0)
 	motor1(forward1)
-	time.sleep(1)
+	time.sleep(0.20)
 	stop()
-
+#========================================================================
+#Make the car move forward
+#========================================================================
 def forward():
+	
 	motor0(forward0)
 	motor1(forward1)
-	'''if mod == 1 :
-		time.sleep(2)
-		for pin in pins :
-			GPIO.output(pin,GPIO.LOW)
-	'''	
 
+#========================================================================
+#Make the car move backward
+#========================================================================
 def backward():
 	motor0(backward0)
 	motor1(backward1)
 
-def forwardWithSpeed(spd = 50):
-	setSpeed(spd)
-	motor0(forward0)
-	motor1(forward1)
+#========================================================================
+#When car detect obstacle, move backward
+#========================================================================
 
-def backwardWithSpeed(spd = 50):
-	setSpeed(spd)
-	motor0(backward0)
-	motor1(backward1)
-
+def collision_auto():
+	car_dir.home()
+	backward()
+	stop()
+	backward()
+	time.sleep(0.6)
+	stop()
+#========================================================================
+#Make the car stop
+#========================================================================
 def stop():
 	for pin in pins:
 		GPIO.output(pin, GPIO.LOW)
@@ -165,6 +164,4 @@ def test():
 if __name__ == '__main__':
 	setup()
 	setSpeed(50)
-	#forward()
-	#backward()
 	stop()
